@@ -1,0 +1,4 @@
+interface:
+  display_name: "Technical Report Builder"
+  short_description: "Build modular interactive technical reports"
+  default_prompt: "Use $build-technical-report to create a polished component-based technical report website."

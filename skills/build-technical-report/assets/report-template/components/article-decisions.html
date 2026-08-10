@@ -1,0 +1,69 @@
+<article class="report-article" id="article-3" data-article="article-3" hidden>
+  <div class="report-intro">
+    <header class="intro reveal">
+      <div class="intro-copy">
+        <span class="context-line">Example decision article</span>
+        <h1>Record why one path was chosen and what could invalidate it</h1>
+        <p>A decision record prevents a polished report from erasing rejected alternatives, unresolved risks, or the evidence still required.</p>
+      </div>
+      <aside class="intro-aside verdict"><strong>Current choice</strong><p>Start with one fixed design and one explicit sensitivity term. Add complexity only after a measured failure identifies the need.</p></aside>
+    </header>
+  </div>
+
+  <div class="report-layout">
+    <aside class="toc-rail">
+      <nav class="toc-nav" aria-label="Decision article sections">
+        <h2 class="rail-title">Decision record</h2>
+        <div class="nav">
+          <a class="is-active" href="#decision-options"><span class="nav-index">01</span><span>Alternatives</span></a>
+          <a href="#decision-risks"><span class="nav-index">02</span><span>Risks</span></a>
+          <a href="#decision-gates"><span class="nav-index">03</span><span>Acceptance gates</span></a>
+          <a href="#decision-next"><span class="nav-index">04</span><span>Next experiments</span></a>
+        </div>
+      </nav>
+    </aside>
+
+    <main>
+      <section id="decision-options" class="reveal">
+        <div class="section-heading"><h2>Compare alternatives on the actual problem</h2><p>“Already established” means a method remains usable but cannot be the novelty claim by itself.</p></div>
+        <div class="idea-rank"><span>01</span><div><h3>Fixed shared design</h3><p>Lowest implementation risk and clearest ablation; chosen for the first study.</p></div></div>
+        <div class="idea-rank"><span>02</span><div><h3>Gain scheduling</h3><p>Potentially higher performance, but requires a reliable scheduling coordinate and transition guarantee.</p></div></div>
+        <div class="idea-rank"><span>03</span><div><h3>Online adaptation</h3><p>Useful for evolving plants, but introduces estimator bias, excitation, and convergence questions.</p></div></div>
+      </section>
+
+      <section id="decision-risks" class="reveal">
+        <div class="section-heading"><h2>Keep risks specific and actionable</h2><p>Each risk should name the evidence that would close it.</p></div>
+        <div class="table-shell">
+          <table class="wide-table">
+            <thead><tr><th>Risk</th><th>Status</th><th>Closing evidence</th></tr></thead>
+            <tbody>
+              <tr><td>The endpoint family is not physical between A and B.</td><td class="state-watch">Open</td><td>Independent intermediate identification.</td></tr>
+              <tr><td>Tracking improvement uses unavailable command.</td><td class="state-good">Controlled</td><td>Raw peak and rate constraints in every scenario.</td></tr>
+              <tr><td>High-frequency noise creates an artificial mode.</td><td class="state-watch">Open</td><td>Command spectrum caused by noise and a nonlinear loop test.</td></tr>
+              <tr><td>The method only improves its training excitation.</td><td class="state-stop">Critical</td><td>Blind holdout excitation and physical experiment.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="decision-gates" class="reveal">
+        <div class="section-heading"><h2>Predeclare acceptance gates</h2><p>A method passes only when performance, feasibility, and robustness hold together.</p></div>
+        <div class="split">
+          <div class="note is-accent"><h3>Accept</h3><p>Lower worst-condition tracking error on endpoints and holdout with no command, rate, or stability violation.</p></div>
+          <div class="note is-warning"><h3>Reject or reposition</h3><p>The result depends on one endpoint, violates the actuator limit, or disappears when the deployed loop is included.</p></div>
+        </div>
+      </section>
+
+      <section id="decision-next" class="reveal">
+        <div class="section-heading"><h2>The next experiment should decide something</h2><p>A compact experiment is stronger than a wide parameter sweep with no frozen hypothesis.</p></div>
+        <ol class="step-list">
+          <li>Collect one intermediate operating-condition dataset for model selection.</li>
+          <li>Freeze the model, objective, baseline, and acceptance metrics.</li>
+          <li>Collect a second intermediate condition as a blind holdout.</li>
+          <li>Run identical endpoint and holdout simulations before physical testing.</li>
+          <li>Publish per-condition results, the worst case, and all failed gates.</li>
+        </ol>
+      </section>
+    </main>
+  </div>
+</article>

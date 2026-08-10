@@ -1,0 +1,26 @@
+{
+  "brand": "Dynamics Lab",
+  "title": "Actuator–specimen evidence report",
+  "accent": "#39BF5E",
+  "articles": [
+    {
+      "id": "article-1",
+      "label": "Evidence report",
+      "summary": "Measured behavior, an interactive operating-condition plot, and the decision it supports.",
+      "component": "components/article-overview.html"
+    },
+    {
+      "id": "article-2",
+      "label": "Method and equations",
+      "summary": "Model definition, assumptions, derivation, and verification gates.",
+      "component": "components/article-method.html"
+    },
+    {
+      "id": "article-3",
+      "label": "Decision record",
+      "summary": "Alternatives, risks, acceptance criteria, and next experiments.",
+      "component": "components/article-decisions.html"
+    }
+  ]
+}
+

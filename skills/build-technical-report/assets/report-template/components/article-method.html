@@ -1,0 +1,67 @@
+<article class="report-article" id="article-2" data-article="article-2" hidden>
+  <div class="report-intro">
+    <header class="intro reveal">
+      <div class="intro-copy">
+        <span class="context-line">Example method article</span>
+        <h1>Make the model, equation, and verification path inspectable</h1>
+        <p>A method article should let another engineer reproduce the calculation and identify exactly where assumptions enter.</p>
+      </div>
+      <aside class="intro-aside verdict"><strong>Method rule</strong><p>Use the simplest model that explains the measured change, then test the assumption that makes it simple.</p></aside>
+    </header>
+  </div>
+
+  <div class="report-layout">
+    <aside class="toc-rail">
+      <nav class="toc-nav" aria-label="Method article sections">
+        <h2 class="rail-title">Method and equations</h2>
+        <div class="nav">
+          <a class="is-active" href="#method-model"><span class="nav-index">01</span><span>Model family</span></a>
+          <a href="#method-objective"><span class="nav-index">02</span><span>Objective</span></a>
+          <a href="#method-architecture"><span class="nav-index">03</span><span>Architecture</span></a>
+          <a href="#method-verification"><span class="nav-index">04</span><span>Verification</span></a>
+        </div>
+      </nav>
+    </aside>
+
+    <main>
+      <section id="method-model" class="reveal">
+        <div class="section-heading"><h2>Define the family before optimizing it</h2><p>Use a dimensionless coordinate so sensitivity values are comparable and the endpoints have unambiguous meaning.</p></div>
+        <div class="math-block" aria-label="Affine parameterized state-space family">
+          <math display="block"><mtable rowspacing="0.7em"><mtr><mtd><mi>A</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><mi>θ</mi><msub><mi>A</mi><mi>Δ</mi></msub></mtd></mtr><mtr><mtd><mi>C</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>C</mi><mn>0</mn></msub><mo>+</mo><mi>θ</mi><msub><mi>C</mi><mi>Δ</mi></msub><mo>,</mo><mspace width="0.8em"></mspace><mi>θ</mi><mo>∈</mo><mo>[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>]</mo></mtd></mtr></mtable></math>
+        </div>
+        <p class="equation-caption">An affine family is a hypothesis until intermediate data validate it.</p>
+      </section>
+
+      <section id="method-objective" class="reveal">
+        <div class="section-heading"><h2>Highlight the decisive equation</h2><p>Keep ordinary performance terms visible and isolate the proposed addition so its effect can be ablated.</p></div>
+        <div class="math-block is-key" aria-label="Weighted worst-condition objective">
+          <math display="block"><mi>J</mi><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo><mo>=</mo><munder><mo>sup</mo><mrow><mi>θ</mi><mo>∈</mo><mo>[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>]</mo></mrow></munder><msub><mrow><mo>||</mo><mrow><mo>[</mo><mtable><mtr><mtd><msub><mi>W</mi><mi>e</mi></msub><msub><mi>E</mi><mi>θ</mi></msub></mtd></mtr><mtr><mtd><msub><mi>W</mi><mi>u</mi></msub><msub><mi>U</mi><mi>θ</mi></msub></mtd></mtr></mtable><mo>]</mo></mrow><mo>||</mo></mrow><mi>∞</mi></msub></math>
+        </div>
+        <div class="note is-warning"><h3>Interpretation boundary</h3><p>An induced norm does not automatically impose a pointwise actuator limit. State the trajectory constraint separately.</p></div>
+      </section>
+
+      <section id="method-architecture" class="reveal">
+        <div class="section-heading"><h2>Show the deployed signal path</h2><p>A block strip is useful when one source affects several downstream calculations.</p></div>
+        <div class="system-strip" aria-label="Technical report data and control flow">
+          <div class="system-node"><strong>Source data</strong><span>measured and generated files</span></div>
+          <div class="system-node"><strong>Model family</strong><span>shared coordinates and units</span></div>
+          <div class="system-node"><strong>Design</strong><span>objective and constraints</span></div>
+          <div class="system-node"><strong>Simulation</strong><span>identical scenarios</span></div>
+          <div class="system-node"><strong>Report</strong><span>evidence and caveats</span></div>
+        </div>
+      </section>
+
+      <section id="method-verification" class="reveal">
+        <div class="section-heading"><h2>Verification is part of the method</h2><p>Report the checks needed to reject the conclusion, not only those expected to pass.</p></div>
+        <ol class="step-list">
+          <li>Verify units, coordinate definitions, and model stability before synthesis.</li>
+          <li>Reserve one operating condition and one excitation as blind holdouts.</li>
+          <li>Compare every method with identical command, rate, delay, and noise conditions.</li>
+          <li>Recalculate metrics from exported signals rather than trusting plot labels.</li>
+          <li>Reject the hypothesis if the improvement disappears on the holdout.</li>
+        </ol>
+      </section>
+    </main>
+  </div>
+</article>
+
