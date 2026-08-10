@@ -55,6 +55,7 @@ Create technical reports from the bundled static template. Preserve evidence, eq
 - Animate only state changes and progressive disclosure. Respect `prefers-reduced-motion`.
 - Use native MathML for equations when practical. Add descriptive `aria-label` values to important equations and figures.
 - Keep plots dependency-free unless the user's existing stack requires a library.
+- Keep plot canvases transparent. Use the report's foreground, muted, border, accent, and font tokens for plot text, axes, grids, and legends so figures remain visually native to the active theme.
 - Never encode meaning by color alone. Pair color with labels, line styles, or symbols.
 
 ## Content rules for agents

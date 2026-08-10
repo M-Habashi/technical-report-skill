@@ -58,7 +58,7 @@
   .table-shell::-webkit-scrollbar { display: none; }
   .wide-table { min-width: 0; table-layout: fixed; }
   th, td { overflow-wrap: anywhere; }
-  .note, .math-block, .plot-shell { background: #fff; }
+  .note, .math-block { background: #fff; }
   .reveal { opacity: 1; transform: none; }
 }
 

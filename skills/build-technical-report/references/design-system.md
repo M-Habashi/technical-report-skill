@@ -58,6 +58,7 @@ Desktop articles use a shared composition:
 ## Surfaces and shape
 
 - Prefer border-separated regions over floating cards.
+- Keep plot canvases transparent rather than placing white or separately colored rectangles behind them.
 - Use 0–4 px radii for controls and bounded figures.
 - Do not use gradients, glassmorphism, large shadows, decorative blobs, or excessive badges.
 - Avoid repeated identical cards when a table, definition list, or ruled sequence communicates structure better.

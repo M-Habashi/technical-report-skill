@@ -51,6 +51,8 @@ Keep scientific data in `data/` or a generated module. The renderer should not k
 
 ## Axis rules
 
+- Keep the SVG and plot-region background transparent.
+- Use the report's typography and theme tokens: foreground for axis titles and active legend text, muted colors for ticks and supporting copy, border colors for grids, and the configured accent for interaction states.
 - Derive domains from finite data only.
 - Add 5–10% padding unless an engineering limit defines the boundary.
 - Make the zero line lighter or thicker than ordinary grid lines when positive and negative values coexist.
