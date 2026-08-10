@@ -32,7 +32,7 @@ Set the report accent in `data/report-config.json`. JavaScript applies it to the
 - Reading measure: keep running prose at or below 72 characters (`72ch`).
 - Compact labels, captions, and specialized controls may use 13–15 px; do not use compact sizes for running prose.
 
-Do not shrink dense technical content below 13 px. Prefer horizontal table scrolling to illegible text. Verify the layout still reflows at 200% text scaling.
+Do not shrink dense technical content below 13 px. Prefer horizontal table scrolling to illegible text. During first-build verification—or when the user explicitly requests it—confirm that the layout still reflows at 200% text scaling.
 
 Readability basis:
 

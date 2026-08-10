@@ -65,7 +65,7 @@ To add an article:
 2. Assign the next stable article id.
 3. Prefix every section id uniquely.
 4. Add one registry entry.
-5. Validate and test direct hashes.
+5. During the report's first build, validate and test direct hashes. For later article additions, skip verification unless the user explicitly requests it.
 
 To remove an article, delete its registry entry first, then its component. Do not leave dead components in the template.
 

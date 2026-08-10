@@ -24,6 +24,8 @@ This repository packages one installable Codex skill under `skills/build-technic
 6. Serve the template over HTTP and verify article navigation, hashes, below-header scrollbar and hover state, slider, legend, zoom, Reset, console, mobile layout, 200% text reflow, and print output—including heading contrast on the light page.
 7. Refresh `docs/technical-report-preview.png` after material visual changes.
 
+These repository checks apply to development of the canonical package and template. Reports created with the skill follow the first-build-only verification cadence in `SKILL.md`.
+
 ## Constraints
 
 - Keep the template dependency-free and runnable without a build step.
