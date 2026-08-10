@@ -33,7 +33,7 @@ Create technical reports from the bundled static template. Preserve evidence, eq
    python -m http.server 8010 --directory <report-directory>
    ```
 
-10. Inspect the rendered desktop and mobile layouts. Test the article drawer, section links, slider, legend toggles, zoom drag, reset, print view, and console.
+10. Inspect the rendered desktop and mobile layouts. Test the article drawer, section links, content scrollbar position and hover state, slider, legend toggles, zoom drag, reset, print view, and console.
 
 ## Non-negotiable architecture
 
@@ -42,7 +42,10 @@ Create technical reports from the bundled static template. Preserve evidence, eq
 - Give every article a stable `article-N` id and every section a globally unique id.
 - Keep the 20/60/20 desktop composition: section rail, reading column, contextual aside.
 - Collapse to a single readable column on small screens with no horizontal page overflow.
-- Use IBM Plex Sans for prose and IBM Plex Mono for labels, measurements, and indices.
+- Load IBM Plex Sans and IBM Plex Mono from Google Fonts. Use the sans face for prose and the mono face for labels, measurements, and indices.
+- Keep running text at a responsive 17–19 px with at least 1.5 line height and a reading measure no wider than 72 characters.
+- Keep the top bar outside the scrolling content viewport so the rounded accent scrollbar begins below it and becomes fully opaque on thumb hover.
+- Do not add a persistent Print button; use browser or operating-system print commands for print testing and export.
 - Use restrained surfaces, thin rules, small radii, and one configurable accent. Do not add gradients, glass effects, decorative shadows, or dashboard filler.
 - Animate only state changes and progressive disclosure. Respect `prefers-reduced-motion`.
 - Use native MathML for equations when practical. Add descriptive `aria-label` values to important equations and figures.
@@ -94,6 +97,7 @@ Finish only when:
 - interactive controls work with mouse and keyboard;
 - no console errors remain;
 - desktop and mobile views are readable;
-- print mode removes navigation controls and preserves equations/tables;
+- the content scrollbar begins below the top bar, uses a translucent accent at rest, and uses the full accent on hover;
+- print mode removes navigation controls, preserves equations/tables, and renders headings with strong dark-on-light contrast;
 - the final report contains no example claims or placeholder data unless the user requested a demo.
 

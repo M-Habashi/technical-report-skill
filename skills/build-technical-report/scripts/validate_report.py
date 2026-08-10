@@ -138,6 +138,30 @@ def main() -> None:
         if required_reference not in index_source:
             errors.append(f"index.html does not reference {required_reference}")
 
+    if 'id="reportViewport"' not in index_source:
+        errors.append("index.html must provide the below-header reportViewport scroll container")
+    if "fonts.googleapis.com" not in index_source:
+        errors.append("index.html must load the report typefaces from Google Fonts")
+    if "printReport" in index_source:
+        errors.append("index.html must not include a persistent Print control")
+
+    base_source = (root / "styles" / "base.css").read_text(encoding="utf-8") if (root / "styles" / "base.css").is_file() else ""
+    for required_style in ("--topbar-height", "--heading", ".report-viewport", "scrollbar-color", "::-webkit-scrollbar-thumb:hover"):
+        if required_style not in base_source:
+            errors.append(f"styles/base.css is missing readable viewport styling: {required_style}")
+
+    responsive_source = (root / "styles" / "responsive.css").read_text(encoding="utf-8") if (root / "styles" / "responsive.css").is_file() else ""
+    if "--heading: #171714" not in responsive_source:
+        errors.append("styles/responsive.css must set a dark heading token for light print output")
+    if ".wide-table { min-width: 0; table-layout: fixed; }" not in responsive_source:
+        errors.append("styles/responsive.css must fit wide tables within the printed page")
+
+    shell_source = (root / "scripts" / "app-shell.js").read_text(encoding="utf-8") if (root / "scripts" / "app-shell.js").is_file() else ""
+    if 'getElementById("reportViewport")' not in shell_source:
+        errors.append("scripts/app-shell.js must calculate progress from reportViewport")
+    if "printReport" in shell_source or "window.print" in shell_source:
+        errors.append("scripts/app-shell.js must not wire a persistent Print control")
+
     if errors:
         fail(errors)
 
