@@ -13,24 +13,24 @@
 .plot-shell { position: relative; overflow: hidden; border: 1px solid var(--border); background: #141412; }
 .plot-shell svg { display: block; width: 100%; min-height: 340px; user-select: none; touch-action: none; }
 .plot-shell.is-zooming svg { cursor: crosshair; }
-.plot-controls { position: sticky; top: 78px; padding: 16px; border-left: 1px solid var(--border); }
-.control-label { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; color: var(--muted-strong); font-size: 13px; }
+.plot-controls { position: sticky; top: 24px; padding: 16px; border-left: 1px solid var(--border); }
+.control-label { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; color: var(--muted-strong); font-size: 14px; }
 .control-value { color: var(--foreground); font-family: var(--font-mono); }
 .condition-slider { width: 100%; accent-color: var(--accent); }
-.slider-range { display: flex; justify-content: space-between; color: var(--muted); font-family: var(--font-mono); font-size: 11px; }
+.slider-range { display: flex; justify-content: space-between; color: var(--muted); font-family: var(--font-mono); font-size: 13px; }
 .plot-legend { display: grid; gap: 6px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border); }
 .legend-item { display: grid; grid-template-columns: 28px 1fr; gap: 8px; align-items: center; padding: 6px 0; border: 0; background: transparent; color: var(--muted-strong); text-align: left; cursor: pointer; }
 .legend-item[aria-pressed="false"] { opacity: 0.42; }
 .legend-line { height: 0; border-top: 3px solid currentColor; }
 .legend-line.is-dashed { border-top-style: dashed; }
-.plot-note { margin: 10px 0 0; color: var(--muted); font-size: 13px; }
+.plot-note { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
 .plot-grid-line { stroke: #30322d; stroke-width: 1; }
 .plot-zero-line { stroke: #777a70; stroke-width: 1.25; }
 .plot-axis-line { stroke: #686b63; stroke-width: 1; }
 .plot-tick-label,
 .plot-axis-label { fill: #d6d4cb; font-family: var(--font-sans); }
-.plot-tick-label { font-size: 12px; }
-.plot-axis-label { font-size: 13px; font-weight: 500; }
+.plot-tick-label { font-size: 13px; }
+.plot-axis-label { font-size: 14px; font-weight: 500; }
 .plot-series { fill: none; stroke-width: 3; vector-effect: non-scaling-stroke; }
 .zoom-selection { fill: color-mix(in srgb, var(--accent) 16%, transparent); stroke: var(--accent); stroke-width: 1.25; stroke-dasharray: 4 3; pointer-events: none; }
 .zoom-selection[hidden] { display: none; }

@@ -20,9 +20,9 @@
 }
 
 @media (max-width: 720px) {
-  .topbar { position: static; padding: 0 16px; }
-  .article-panel { top: 54px; }
-  .article-panel-backdrop { top: 54px; }
+  .topbar { padding: 0 16px; }
+  .article-panel { top: var(--topbar-height); }
+  .article-panel-backdrop { top: var(--topbar-height); }
   .article-panel-toggle { margin-right: 12px; }
   .brand span { display: none; }
   .report-intro { padding-top: 34px; }
@@ -33,7 +33,7 @@
   .toc-rail { position: static; justify-self: auto; width: 100%; padding: 28px 24px 0; }
   .nav a { min-height: 40px; align-items: center; }
   main { width: 100%; padding: 0 24px 72px; }
-  h1 { font-size: 34px; }
+  h1 { font-size: 36px; }
   section { padding: 48px 0; }
   .metric-grid { grid-template-columns: 1fr; }
   .plot-header { display: block; }
@@ -44,14 +44,20 @@
 }
 
 @media print {
-  :root { color-scheme: light; --background: #fff; --foreground: #171714; --surface: #fff; --surface-strong: #f6f4ef; --muted: #5e5b54; --muted-strong: #33312d; --border: #cbc7bd; --border-soft: #dedad1; }
-  body { background: #fff; color: #171714; }
+  :root { color-scheme: light; --background: #fff; --foreground: #171714; --heading: #171714; --surface: #fff; --surface-strong: #f6f4ef; --muted: #5e5b54; --muted-strong: #33312d; --border: #cbc7bd; --border-soft: #dedad1; }
+  body { display: block; height: auto; overflow: visible; background: #fff; color: #171714; }
+  .report-viewport { height: auto; overflow: visible; scrollbar-width: none; }
+  .report-viewport::-webkit-scrollbar { display: none; }
   .report-intro { padding-top: 30px; }
   .intro, .report-layout { display: block; }
   .intro-copy, .intro-aside { padding: 0 30px 24px; }
   .topbar, .toc-rail, .article-panel, .article-panel-backdrop, .plot-toolbar, .plot-controls { display: none; }
   main { width: 100%; padding: 30px; }
   section, .plot-block, .math-block, .table-shell { break-inside: avoid; }
+  .table-shell { overflow: visible; }
+  .table-shell::-webkit-scrollbar { display: none; }
+  .wide-table { min-width: 0; table-layout: fixed; }
+  th, td { overflow-wrap: anywhere; }
   .note, .math-block, .plot-shell { background: #fff; }
   .reveal { opacity: 1; transform: none; }
 }

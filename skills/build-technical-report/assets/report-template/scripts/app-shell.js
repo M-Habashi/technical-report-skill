@@ -7,6 +7,7 @@ export function initAppShell(config) {
   const backdrop = document.getElementById("articlePanelBackdrop");
   const articleLabel = document.getElementById("articleLabel");
   const progress = document.getElementById("readingProgress");
+  const viewport = document.getElementById("reportViewport");
   const articleNames = new Map(config.articles.map(article => [article.id, article.label]));
 
   function setPanel(open) {
@@ -19,8 +20,8 @@ export function initAppShell(config) {
   }
 
   function updateProgress() {
-    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    const value = scrollable > 0 ? Math.min(100, Math.max(0, 100 * window.scrollY / scrollable)) : 100;
+    const scrollable = viewport.scrollHeight - viewport.clientHeight;
+    const value = scrollable > 0 ? Math.min(100, Math.max(0, 100 * viewport.scrollTop / scrollable)) : 100;
     progress.style.width = `${value}%`;
     progress.setAttribute("aria-valuenow", String(Math.round(value)));
   }
@@ -49,7 +50,7 @@ export function initAppShell(config) {
     history.replaceState(null, "", nextHash || `#${articleId}`);
     const target = nextHash && nextHash !== `#${articleId}` ? document.querySelector(nextHash) : null;
     if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-    else window.scrollTo({ top: 0, behavior: "smooth" });
+    else viewport.scrollTo({ top: 0, behavior: "smooth" });
     updateProgress();
   }
 
@@ -66,14 +67,14 @@ export function initAppShell(config) {
     }
   });
 
-  window.addEventListener("scroll", updateProgress, { passive: true });
+  viewport.addEventListener("scroll", updateProgress, { passive: true });
   window.addEventListener("resize", updateProgress);
 
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add("is-visible");
     });
-  }, { threshold: 0.08 });
+  }, { root: viewport, threshold: 0.08 });
   document.querySelectorAll(".reveal").forEach(element => revealObserver.observe(element));
 
   const sectionObserver = new IntersectionObserver(entries => {
@@ -85,7 +86,7 @@ export function initAppShell(config) {
         link.classList.toggle("is-active", link.getAttribute("href") === `#${entry.target.id}`);
       });
     });
-  }, { rootMargin: "-25% 0px -65%", threshold: 0 });
+  }, { root: viewport, rootMargin: "-25% 0px -65%", threshold: 0 });
   document.querySelectorAll("main section[id]").forEach(section => sectionObserver.observe(section));
 
   document.querySelectorAll(".nav a").forEach(link => {
@@ -99,7 +100,6 @@ export function initAppShell(config) {
     });
   });
 
-  document.getElementById("printReport").addEventListener("click", () => window.print());
   const initialHash = location.hash || `#${config.articles[0].id}`;
   activateArticle(articleForHash(initialHash), initialHash);
   updateProgress();

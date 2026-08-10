@@ -21,19 +21,24 @@ Create technical reports from the bundled static template. Preserve evidence, eq
 5. Read [reusable-blocks.md](references/reusable-blocks.md) when selecting tables, metrics, callouts, equations, timelines, or workflow blocks.
 6. Read [interactive-plots.md](references/interactive-plots.md) before changing SVG plots, sliders, legends, zoom, axes, or data adapters.
 7. Replace the example content and data. Keep article HTML in `components/`, behavior in `scripts/`, data/configuration in `data/`, and presentation in `styles/`.
-8. Run structural validation:
+8. Choose the verification cadence:
+
+   - **First build of a newly scaffolded report:** complete steps 9–11 before delivery.
+   - **Any later edit to an existing report:** do not run validators, browser checks, print/PDF exports, screenshots, or other verification unless the user explicitly asks for it. If asked, run only the requested checks.
+
+9. For a first build, run structural validation:
 
    ```powershell
    python scripts/validate_report.py <report-directory>
    ```
 
-9. Serve over HTTP—component loading does not work reliably from `file://`:
+10. For a first build, serve over HTTP—component loading does not work reliably from `file://`:
 
    ```powershell
    python -m http.server 8010 --directory <report-directory>
    ```
 
-10. Inspect the rendered desktop and mobile layouts. Test the article drawer, section links, slider, legend toggles, zoom drag, reset, print view, and console.
+11. For a first build, inspect the rendered desktop and mobile layouts. Test the article drawer, section links, content scrollbar position and hover state, slider, legend toggles, zoom drag, reset, print view, and console.
 
 ## Non-negotiable architecture
 
@@ -42,7 +47,10 @@ Create technical reports from the bundled static template. Preserve evidence, eq
 - Give every article a stable `article-N` id and every section a globally unique id.
 - Keep the 20/60/20 desktop composition: section rail, reading column, contextual aside.
 - Collapse to a single readable column on small screens with no horizontal page overflow.
-- Use IBM Plex Sans for prose and IBM Plex Mono for labels, measurements, and indices.
+- Load IBM Plex Sans and IBM Plex Mono from Google Fonts. Use the sans face for prose and the mono face for labels, measurements, and indices.
+- Keep running text at a responsive 17–19 px with at least 1.5 line height and a reading measure no wider than 72 characters.
+- Keep the top bar outside the scrolling content viewport so the rounded accent scrollbar begins below it and becomes fully opaque on thumb hover.
+- Do not add a persistent Print button; use browser or operating-system print commands for print testing and export.
 - Use restrained surfaces, thin rules, small radii, and one configurable accent. Do not add gradients, glass effects, decorative shadows, or dashboard filler.
 - Animate only state changes and progressive disclosure. Respect `prefers-reduced-motion`.
 - Use native MathML for equations when practical. Add descriptive `aria-label` values to important equations and figures.
@@ -66,7 +74,7 @@ Create technical reports from the bundled static template. Preserve evidence, eq
 2. Change its article id and all section ids.
 3. Add one entry to `data/report-config.json` with `id`, `label`, `summary`, and `component`.
 4. Add matching section links inside the article's `.nav`.
-5. Run `validate_report.py` and browser-test direct hashes such as `#article-3` and `#new-section`.
+5. If this article is part of the report's first build, or the user explicitly requests verification, run `validate_report.py` and browser-test direct hashes such as `#article-3` and `#new-section`. Otherwise stop after implementing the article.
 
 Do not hard-code article names or counts in `index.html` or `app-shell.js`; the registry owns them.
 
@@ -84,9 +92,11 @@ The bundled plot demonstrates the required interaction contract:
 
 Adapt `scripts/interactive-plot.js` rather than rewriting the interaction from scratch. Keep data generation or exported arrays outside the renderer.
 
-## Completion gate
+## Initial-build completion gate
 
-Finish only when:
+Apply this gate only to the first build of a newly scaffolded report, or when the user explicitly asks for full verification. Do not rerun it after later edits by default.
+
+Finish the initial build only when:
 
 - the bundled validator passes;
 - every registered component loads over HTTP;
@@ -94,6 +104,7 @@ Finish only when:
 - interactive controls work with mouse and keyboard;
 - no console errors remain;
 - desktop and mobile views are readable;
-- print mode removes navigation controls and preserves equations/tables;
+- the content scrollbar begins below the top bar, uses a translucent accent at rest, and uses the full accent on hover;
+- print mode removes navigation controls, preserves equations/tables, and renders headings with strong dark-on-light contrast;
 - the final report contains no example claims or placeholder data unless the user requested a demo.
 
