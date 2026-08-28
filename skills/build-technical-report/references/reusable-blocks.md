@@ -35,9 +35,8 @@ Use `.system-strip` for three or more dependent blocks in a signal chain. Keep l
 Each `.plot-block` contains:
 
 1. `.plot-header` with title, interpretation, and controls;
-2. `.plot-workbench` with the SVG and sticky/adjacent controls;
-3. an accessible legend with toggle buttons;
+2. `.plot-workbench` with a Plotly host and sticky/adjacent controls;
+3. Plotly's labeled, clickable legend;
 4. `.plot-note` explaining normalization, limits, and caveats.
 
 Never place a legend or slider where it stops midway through a long subplot group. Sticky controls should be scoped to the complete plot workbench.
-

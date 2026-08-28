@@ -1,6 +1,6 @@
 # Technical Report Skill
 
-An agent-first Codex skill for building modular, publication-style technical report websites with multiple articles, sticky navigation, MathML equations, reusable evidence blocks, and dependency-free interactive SVG plots.
+An agent-first Codex skill for building modular, publication-style technical report websites with multiple articles, sticky navigation, MathML equations, reusable evidence blocks, and interactive Plotly WebGL plots.
 
 ![Technical report template preview](docs/technical-report-preview.png)
 
@@ -10,7 +10,7 @@ An agent-first Codex skill for building modular, publication-style technical rep
 - A configuration-driven multi-article system; adding an article requires one component and one registry entry.
 - A documented typography, spacing, color, motion, and responsive-layout system.
 - Reusable blocks for decisions, caveats, metrics, literature tables, equations, workflows, and system diagrams.
-- An interactive plot module with a slider, accessible series toggles, drag-to-zoom, disappearing selection highlight, and Reset.
+- An interactive Plotly WebGL module with a slider, clickable series legend, hover inspection, drag/scroll zoom, image export, and Reset.
 - Deterministic scaffolding and structural validation scripts.
 - Progressive-disclosure references so agents load only the instructions needed for the current edit.
 
@@ -68,4 +68,3 @@ The template favors evidence density over dashboard decoration: restrained dark 
 ## License
 
 MIT
-

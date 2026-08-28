@@ -16,6 +16,8 @@ REQUIRED_FILES = (
     "scripts/main.js",
     "scripts/app-shell.js",
     "scripts/interactive-plot.js",
+    "scripts/vendor/plotly-gl2d.min.js",
+    "scripts/vendor/PLOTLY-LICENSE.txt",
     "styles/base.css",
     "styles/content.css",
     "styles/plots.css",
@@ -134,7 +136,7 @@ def main() -> None:
             errors.append(f"article id must occur once in components: {article_id}")
 
     index_source = (root / "index.html").read_text(encoding="utf-8") if (root / "index.html").is_file() else ""
-    for required_reference in ("data/report-config.json", "scripts/main.js", "styles/base.css"):
+    for required_reference in ("data/report-config.json", "scripts/vendor/plotly-gl2d.min.js", "scripts/main.js", "styles/base.css"):
         if required_reference not in index_source:
             errors.append(f"index.html does not reference {required_reference}")
 
@@ -171,4 +173,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

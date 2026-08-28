@@ -37,8 +37,7 @@
   section { padding: 48px 0; }
   .metric-grid { grid-template-columns: 1fr; }
   .plot-header { display: block; }
-  .plot-toolbar { margin-top: 12px; }
-  .plot-shell svg { min-height: 300px; }
+  .plotly-host { min-height: 320px; }
   .status-line { grid-template-columns: 1fr; }
   .status-line span { border-top: 1px solid var(--border); border-left: 0; }
 }
@@ -51,7 +50,7 @@
   .report-intro { padding-top: 30px; }
   .intro, .report-layout { display: block; }
   .intro-copy, .intro-aside { padding: 0 30px 24px; }
-  .topbar, .toc-rail, .article-panel, .article-panel-backdrop, .plot-toolbar, .plot-controls { display: none; }
+  .topbar, .toc-rail, .article-panel, .article-panel-backdrop, .plot-controls { display: none; }
   main { width: 100%; padding: 30px; }
   section, .plot-block, .math-block, .table-shell { break-inside: avoid; }
   .table-shell { overflow: visible; }
@@ -67,4 +66,3 @@
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   .reveal { opacity: 1; transform: none; }
 }
-

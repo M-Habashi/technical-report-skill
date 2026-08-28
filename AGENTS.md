@@ -28,7 +28,7 @@ These repository checks apply to development of the canonical package and templa
 
 ## Constraints
 
-- Keep the template dependency-free and runnable without a build step.
+- Keep Plotly vendored and pinned so the template remains runnable offline without a build step.
 - Use `pnpm` if JavaScript tooling is ever introduced.
 - Do not turn `index.html` into a monolith; articles belong in `components/` and in the registry.
 - Preserve accessibility labels, reduced-motion behavior, print styles, and the no-horizontal-overflow mobile layout.
