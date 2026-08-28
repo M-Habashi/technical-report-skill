@@ -1,4 +1,4 @@
-# Interactive SVG plots
+# Interactive Plotly plots
 
 ## Module boundary
 
@@ -9,8 +9,8 @@ initInteractivePlot(container, {
   condition: 0,
   series(condition) {
     return [
-      { id: "measured", label: "Measured", color: "#007CA8", dashed: false, points: [...] },
-      { id: "command", label: "Command", color: "#AC6420", dashed: true, points: [...] }
+      { id: "measured", label: "Measured", color: "#007CA8", dash: "solid", points: [...] },
+      { id: "command", label: "Command", color: "#AC6420", dash: "dash", points: [...] }
     ];
   }
 });
@@ -29,24 +29,20 @@ Keep scientific data in `data/` or a generated module. The renderer should not k
 
 ### Legend
 
-- Use buttons with `aria-pressed`.
-- Preserve axes when a series is hidden unless the user explicitly requests rescaling.
-- Pair color with dashed/solid styles and readable text.
+- Use Plotly's native legend with `itemclick: "toggle"` and `itemdoubleclick: "toggleothers"`.
+- Set stable trace `uid` values and `legend.uirevision` so hidden state survives updates.
+- Pair color with dashed/solid styles and readable names.
 
 ### Zoom
 
-- Magnifier mode is opt-in.
-- Drag only inside the plot region.
-- Draw a translucent selection rectangle while dragging.
-- Remove the selection rectangle immediately on pointer release or cancellation.
-- Ignore very small selections.
-- Recalculate axis ticks after applying the selected domain.
-- Expose a Reset button only after the domain changes.
+- Prefer Plotly's native drag zoom, scroll zoom, double-click reset, and modebar Reset axes action.
+- Remove selection and lasso controls unless the report needs them.
+- Set `uirevision` when data updates should preserve the current view.
 
 ### Responsive behavior
 
-- Use one stable `viewBox`; let CSS size the SVG.
-- Calculate pointer positions in SVG coordinates using the current bounding rectangle.
+- Set `responsive: true` and give the plot host a CSS `min-height`.
+- Resize with `Plotly.Plots.resize` when the report shell changes size.
 - Do not set a fixed pixel width in JavaScript.
 
 ## Axis rules
@@ -61,8 +57,12 @@ Keep scientific data in `data/` or a generated module. The renderer should not k
 
 ## Performance
 
-- Use SVG paths for lines and a single DOM update per path.
-- Reuse axis and legend nodes.
-- For large data, decimate before rendering; do not emit thousands of markers.
+- Default to `scattergl` for line plots, especially long records and multi-trace overlays.
+- Use `Plotly.react` rather than rebuilding the plot container.
+- For density overlays, place alpha in the RGBA line color. Trace-level `opacity` is uniform across the completed trace and does not encode repeated-pass density.
+- Decimate exceptionally large data before rendering and avoid markers unless they add evidence.
 - Respect reduced motion and avoid animated axes during rapid slider input.
 
+## Bundled runtime
+
+The template vendors the pinned Plotly GL2D 3.7.0 partial bundle at `scripts/vendor/plotly-gl2d.min.js`. Keep the adjacent license file and load the bundle before `scripts/main.js`. Do not replace it with a CDN URL; scaffolded reports must remain runnable offline and without a build step.

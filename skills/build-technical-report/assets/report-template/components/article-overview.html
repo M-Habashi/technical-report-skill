@@ -54,29 +54,24 @@
       <section id="overview-response" class="reveal">
         <div class="section-heading">
           <h2>Let the reader inspect the family</h2>
-          <p>The slider changes the operating coordinate. Use the magnifier to drag a rectangular axis range; its selection highlight disappears as soon as the zoom is applied.</p>
+          <p>The slider changes the operating coordinate. Plotly provides drag and scroll zoom, hover inspection, reset, image export, and clickable legend controls.</p>
         </div>
 
         <div class="plot-block" id="responsePlotLab">
           <div class="plot-header">
             <div><h3>Normalized step response</h3><p>Solid = measured response · dashed = command</p></div>
-            <div class="plot-toolbar">
-              <button class="plot-action" type="button" data-plot-action="zoom" aria-pressed="false" aria-label="Enable drag to zoom">Magnifier</button>
-              <button class="plot-action" type="button" data-plot-action="reset" hidden>Reset</button>
-            </div>
           </div>
           <div class="plot-workbench">
             <div class="plot-main">
               <div class="plot-shell">
-                <svg viewBox="0 0 780 390" role="img" aria-label="Interactive normalized step-response plot" data-plot-svg></svg>
+                <div class="plotly-host" role="img" aria-label="Interactive normalized step-response plot" data-plot-host></div>
               </div>
-              <p class="plot-note">The zero line is emphasized for contrast. Axes update after zoom; Reset restores the full domain.</p>
+              <p class="plot-note">Click a legend item to toggle a series; double-click to isolate it. Drag or scroll to zoom, then double-click or use the modebar to reset.</p>
             </div>
             <aside class="plot-controls" aria-label="Plot controls">
               <label class="control-label" for="conditionSlider"><span>Operating coordinate</span><span class="control-value" data-condition-value>0.00</span></label>
               <input class="condition-slider" id="conditionSlider" data-condition-slider type="range" min="0" max="100" value="0" step="1">
               <div class="slider-range"><span>A</span><span>B</span></div>
-              <div class="plot-legend" data-plot-legend aria-label="Visible series"></div>
             </aside>
           </div>
         </div>
@@ -101,4 +96,3 @@
     </main>
   </div>
 </article>
-

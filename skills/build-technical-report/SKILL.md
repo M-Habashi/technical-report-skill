@@ -1,6 +1,6 @@
 ---
 name: build-technical-report
-description: Build or refactor polished component-based technical report websites with a restrained dark editorial layout, multi-article navigation, sticky section rails, reusable evidence blocks, MathML equations, and dependency-free interactive SVG plots with sliders and zoom. Use when Codex needs to create an engineering/research report in HTML/CSS/JavaScript, reproduce this report architecture, add articles or technical visualizations, or turn analysis results into an organized browsable report.
+description: Build or refactor polished component-based technical report websites with a restrained dark editorial layout, multi-article navigation, sticky section rails, reusable evidence blocks, MathML equations, and interactive Plotly WebGL plots with sliders and zoom. Use when Codex needs to create an engineering/research report in HTML/CSS/JavaScript, reproduce this report architecture, add articles or technical visualizations, or turn analysis results into an organized browsable report.
 ---
 
 # Build Technical Report
@@ -19,7 +19,7 @@ Create technical reports from the bundled static template. Preserve evidence, eq
 3. Read [design-system.md](references/design-system.md) before changing layout, typography, motion, or colors.
 4. Read [articles-and-components.md](references/articles-and-components.md) before adding, removing, or renaming articles.
 5. Read [reusable-blocks.md](references/reusable-blocks.md) when selecting tables, metrics, callouts, equations, timelines, or workflow blocks.
-6. Read [interactive-plots.md](references/interactive-plots.md) before changing SVG plots, sliders, legends, zoom, axes, or data adapters.
+6. Read [interactive-plots.md](references/interactive-plots.md) before changing Plotly plots, sliders, legends, zoom, axes, or data adapters.
 7. Replace the example content and data. Keep article HTML in `components/`, behavior in `scripts/`, data/configuration in `data/`, and presentation in `styles/`.
 8. Choose the verification cadence:
 
@@ -54,8 +54,8 @@ Create technical reports from the bundled static template. Preserve evidence, eq
 - Use restrained surfaces, thin rules, small radii, and one configurable accent. Do not add gradients, glass effects, decorative shadows, or dashboard filler.
 - Animate only state changes and progressive disclosure. Respect `prefers-reduced-motion`.
 - Use native MathML for equations when practical. Add descriptive `aria-label` values to important equations and figures.
-- Keep plots dependency-free unless the user's existing stack requires a library.
-- Keep plot canvases transparent. Use the report's foreground, muted, border, accent, and font tokens for plot text, axes, grids, and legends so figures remain visually native to the active theme.
+- Use the bundled Plotly GL2D build and `scattergl` as the default plot renderer. Keep it vendored and pinned so generated reports run without a build step or network dependency.
+- Keep Plotly canvases transparent. Use the report's foreground, muted, border, accent, and font tokens for plot text, axes, grids, and legends so figures remain visually native to the active theme.
 - Never encode meaning by color alone. Pair color with labels, line styles, or symbols.
 
 ## Content rules for agents
@@ -84,14 +84,13 @@ Do not hard-code article names or counts in `index.html` or `app-shell.js`; the 
 The bundled plot demonstrates the required interaction contract:
 
 - a labeled range slider changes an operating condition;
-- a stable SVG view box keeps axes responsive;
-- legend buttons toggle series without changing layout;
-- magnifier mode enables drag-to-zoom;
-- the selection highlight disappears after the zoom completes;
-- Reset restores the complete domain and every control state;
-- axes are recalculated from the active domain and visible series.
+- `scattergl` keeps dense and long traces responsive;
+- Plotly's native legend toggles or isolates series without custom visibility state;
+- native drag, scroll, and modebar controls provide zoom and reset;
+- `uirevision` preserves the reader's zoom and legend state during slider updates;
+- axis titles carry units and the zero line remains visually distinct.
 
-Adapt `scripts/interactive-plot.js` rather than rewriting the interaction from scratch. Keep data generation or exported arrays outside the renderer.
+Adapt `scripts/interactive-plot.js` rather than rewriting the interaction from scratch. Keep data generation or exported arrays outside the renderer. For density plots such as hysteresis, use an RGBA line color with low alpha so overlapping passes darken naturally; `trace.opacity` alone applies uniformly to the entire trace and cannot reveal overlap density.
 
 ## Initial-build completion gate
 
@@ -108,4 +107,3 @@ Finish the initial build only when:
 - the content scrollbar begins below the top bar, uses a translucent accent at rest, and uses the full accent on hover;
 - print mode removes navigation controls, preserves equations/tables, and renders headings with strong dark-on-light contrast;
 - the final report contains no example claims or placeholder data unless the user requested a demo.
-
